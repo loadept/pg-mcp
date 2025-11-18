@@ -27,8 +27,10 @@ jobs:
 
       - name: Build applications
         run: |
-          GOOS=windows GOARCH=amd64 go build -o pg-mcp.exe cmd/pg-mcp/main.go
-          GOOS=linux GOARCH=amd64 go build -o pg-mcp cmd/pg-mcp/main.go
+          VERSION=$(git describe --tags --abbrev=0)
+
+          GOOS=windows GOARCH=amd64 go build -ldflags "-X main.VERSION=$VERSION" -o pg-mcp.exe cmd/pg-mcp/main.go
+          GOOS=linux GOARCH=amd64 go build -ldflags "-X main.VERSION=$VERSION" -o pg-mcp cmd/pg-mcp/main.go
 
       - name: Package applications
         run: |

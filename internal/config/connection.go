@@ -22,15 +22,17 @@ type postgres struct {
 }
 
 // Connect establishes a connection to the PostgreSQL database.
-// It retrieves the connection URI from environment variables, configures
+// It receives the connection URI as a parameter, configures
 // connection pool settings, and validates the connection with a ping.
+//
+// Parameters:
+//   - pgURI: PostgreSQL connection URI string
 //
 // Returns:
 //   - error: Any error encountered during connection establishment
-func (s *postgres) Connect() error {
-	pgURI := GetEnv("POSTGRES_URI")
+func (s *postgres) Connect(pgURI string) error {
 	if pgURI == "" {
-		return fmt.Errorf("POSTGRES_URI environment variable is required")
+		return fmt.Errorf("postgres URI is required, please provide it as a parameter")
 	}
 
 	db, err := sql.Open("postgres", pgURI)
@@ -74,12 +76,12 @@ func (s *postgres) getNow() (string, error) {
 // Returns:
 //   - *postgres: Singleton postgres instance with established connection
 //   - error: Any error encountered during connection initialization
-func NewDBPostgres() (*postgres, error) {
+func NewDBPostgres(pgURI string) (*postgres, error) {
 	var err error
 
 	onceDB.Do(func() {
 		instance = &postgres{}
-		if err = instance.Connect(); err == nil {
+		if err = instance.Connect(pgURI); err == nil {
 			var now string
 
 			now, err = instance.getNow()

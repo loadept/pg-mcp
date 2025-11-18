@@ -19,15 +19,18 @@ Descarga el ejecutable precompilado desde las [releases](https://github.com/load
 ## Ejecución
 ```bash
 # Linux/macOS
-./pg-mcp
+./pg-mcp -u "postgres://usuario:contraseña@localhost:5432/basedatos?sslmode=disable"
 
 # Windows
-pg-mcp.exe
+pg-mcp.exe -u "postgres://usuario:contraseña@localhost:5432/basedatos?sslmode=disable"
 ```
 
-## Variables de Entorno
+## Opciones de Línea de Comandos
 ```bash
-POSTGRES_URI="postgres://usuario:contraseña@localhost:5432/basedatos?sslmode=disable"
+-u    URI de conexión a PostgreSQL (requerido)
+      Formato: postgres://usuario:contraseña@host:puerto/basedatos?sslmode=disable
+
+-version    Muestra la versión de la aplicación
 ```
 
 ## Herramientas

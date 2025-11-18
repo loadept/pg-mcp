@@ -16,7 +16,7 @@ var (
 func LoadEnvs() {
 	once.Do(func() {
 		envs = map[string]string{
-			"POSTGRES_URI": getEnvOrDefault("POSTGRES_URI", "postgres://user:password@localhost:5432/mydb?sslmode=disable"),
+			// "POSTGRES_URI": getEnvOrDefault("POSTGRES_URI", "postgres://user:password@localhost:5432/mydb?sslmode=disable"),
 		}
 	})
 }
@@ -31,7 +31,7 @@ func LoadEnvs() {
 //
 // Returns:
 //   - string: The environment variable value or the default value
-func getEnvOrDefault(key, defaultValue string) string {
+func GetEnvOrDefault(key, defaultValue string) string {
 	if value, exists := os.LookupEnv(key); exists {
 		return value
 	}

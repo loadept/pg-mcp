@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -13,12 +14,24 @@ import (
 	"loadept.com/pg-mcp/internal/di"
 )
 
+var VERSION = "dev"
+
+var version = flag.Bool("version", false, "Show the application version")
+
 func init() {
 	config.LoadEnvs()
 }
 
 func main() {
-	pg, err := config.NewDBPostgres()
+	uri := flag.String("u", "", "PostgreSQL connection URI")
+	flag.Parse()
+
+	if *version {
+		fmt.Printf("pg-mcp version %s\n", VERSION)
+		os.Exit(0)
+	}
+
+	pg, err := config.NewDBPostgres(*uri)
 	if err != nil {
 		fmt.Println("An error occurred while connecting to the database:", err)
 		os.Exit(1)
@@ -27,7 +40,7 @@ func main() {
 
 	implementation := &mcp.Implementation{
 		Name:    "PostgreSQL MCP Server",
-		Version: "0.2.0",
+		Version: VERSION,
 	}
 	server := mcp.NewServer(implementation, nil)
 
