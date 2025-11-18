@@ -24,23 +24,22 @@ func main() {
 		os.Exit(1)
 	}
 	defer pg.Close()
-	db := pg.GetDB()
 
 	implementation := &mcp.Implementation{
 		Name:    "PostgreSQL MCP Server",
-		Version: "0.1.0",
+		Version: "0.2.0",
 	}
 	server := mcp.NewServer(implementation, nil)
 
-	containerDependencies := di.NewContainer(db)
-	tool := tool.GetTools(
+	containerDependencies := di.NewContainer(pg.GetDB())
+	tool := tool.LoadTools(
 		containerDependencies.QueryService,
 		containerDependencies.DatabaseInfoService,
 	)
 
-	application.LoadTool(server, tool.GetTableInfo)
-	application.LoadTool(server, tool.ListTables)
-	application.LoadTool(server, tool.ExecuteQuery)
+	application.AddTool(server, tool.GetTableInfo)
+	application.AddTool(server, tool.ListTables)
+	application.AddTool(server, tool.ExecuteQuery)
 
 	log.Println("MCP server is running...")
 	if err := server.Run(context.Background(), &mcp.StdioTransport{}); err != nil {

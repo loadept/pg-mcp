@@ -5,7 +5,7 @@ import (
 	"loadept.com/pg-mcp/internal/domain"
 )
 
-func LoadTool[In, Out any](server *mcp.Server, tool domain.MCPTransport[In, Out]) {
+func AddTool[In, Out any](server *mcp.Server, tool domain.MCPTransport[In, Out]) {
 	metadata, handler := tool.MCPTool()
 	mcp.AddTool(server, metadata, handler)
 }

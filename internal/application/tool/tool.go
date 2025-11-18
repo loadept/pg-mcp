@@ -8,7 +8,7 @@ type Tool struct {
 	ExecuteQuery *ExecuteQuery
 }
 
-func GetTools(
+func LoadTools(
 	queryService *service.QueryService,
 	databaseInfoService *service.DatabaseInfoService,
 ) *Tool {

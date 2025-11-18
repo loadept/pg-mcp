@@ -2,7 +2,7 @@
 .env.local
 .env.*.local
 
-pg-mcp
+!pg-mcp/
 pg-mcp.exe
 *.exe
 
