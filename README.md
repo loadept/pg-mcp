@@ -1,3 +1,5 @@
+[![Postgres MCP](https://github.com/loadept/pg-mcp/actions/workflows/pg_workflow.yml/badge.svg)](https://github.com/loadept/pg-mcp/actions/workflows/pg_workflow.yml)
+
 # pg-mcp
 
 **Lenguaje:** Go 1.25+  
