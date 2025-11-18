@@ -23,18 +23,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd pg
           go mod download
 
       - name: Build applications
         run: |
-          cd pg
           GOOS=windows GOARCH=amd64 go build -o pg-mcp.exe cmd/pg-mcp/main.go
           GOOS=linux GOARCH=amd64 go build -o pg-mcp cmd/pg-mcp/main.go
 
       - name: Package applications
         run: |
-          cd pg
           mkdir windows-pg-mcp && cp pg-mcp.exe README.md windows-pg-mcp/
           mkdir linux-pg-mcp && cp pg-mcp README.md linux-pg-mcp/
           tar -czf windows-pg-mcp.tar.gz windows-pg-mcp
@@ -45,7 +42,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd pg
           gh release create ${{ github.ref_name }} \
             windows-pg-mcp.tar.gz \
             linux-pg-mcp.tar.gz \
