@@ -1,6 +1,5 @@
 # pg-mcp
 
-**Versión:** 0.1.0  
 **Lenguaje:** Go 1.25+  
 **Tipo:** Ejecutable binario
 
