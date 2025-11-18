@@ -18,11 +18,10 @@ func NewQueryService(repo *repository.QueryRepository) *QueryService {
 func (s *QueryService) ExecuteQuery(
 	ctx context.Context,
 	query string,
-	args ...any,
 ) ([]map[string]any, error) {
 	if query == "" {
 		return nil, fmt.Errorf("query cannot be empty")
 	}
 
-	return s.repo.ExecuteQuery(ctx, query, args...)
+	return s.repo.ExecuteQuery(ctx, query)
 }

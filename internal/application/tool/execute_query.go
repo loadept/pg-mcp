@@ -27,7 +27,7 @@ func (m *ExecuteQuery) MCPTool() (
 		domain.QueryToolOutput,
 		error,
 	) {
-		results, err := m.queryService.ExecuteQuery(ctx, input.Query, input.Args...)
+		results, err := m.queryService.ExecuteQuery(ctx, input.Query)
 		if err != nil {
 			output := domain.QueryToolOutput{
 				Detail:   fmt.Sprintf("An error occurred while executing the query: %v", err.Error()),

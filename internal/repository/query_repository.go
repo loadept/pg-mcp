@@ -16,7 +16,6 @@ func NewQueryRepository(db *sql.DB) *QueryRepository {
 func (r *QueryRepository) ExecuteQuery(
 	ctx context.Context,
 	query string,
-	args ...any,
 ) ([]map[string]any, error) {
 	tx, err := r.db.BeginTx(ctx, &sql.TxOptions{
 		ReadOnly:  true,
@@ -27,7 +26,7 @@ func (r *QueryRepository) ExecuteQuery(
 	}
 	defer tx.Rollback()
 
-	rows, err := tx.QueryContext(ctx, query, args...)
+	rows, err := tx.QueryContext(ctx, query)
 	if err != nil {
 		return nil, err
 	}

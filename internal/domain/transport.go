@@ -8,7 +8,6 @@ type MCPTransport[In, Out any] interface {
 
 type QueryToolInput struct {
 	Query string `json:"query" jsonschema:"Query you want to perform on the Postgres database (SELECT only, maximum 50 rows)"`
-	Args  []any  `json:"args,omitempty" jsonschema:"Parameters for the query, if any (using placeholders $1, $2, $3, ...)"`
 }
 
 type QueryToolOutput struct {
