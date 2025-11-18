@@ -1,0 +1,15 @@
+.env
+.env.local
+.env.*.local
+
+pg-mcp
+pg-mcp.exe
+*.exe
+
+*.tar.gz
+*.zip
+
+.vscode/
+.idea/
+*.swp
+*.swo
