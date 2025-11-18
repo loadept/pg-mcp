@@ -7,14 +7,37 @@ import (
 	"loadept.com/pg-mcp/internal/domain"
 )
 
+// DatabaseInfoRepository handles database metadata operations.
+// It provides methods to query information about database tables and their structures
+// using PostgreSQL's information_schema views.
 type DatabaseInfoRepository struct {
 	db *sql.DB
 }
 
+// NewDatabaseInfoRepository creates a new instance of DatabaseInfoRepository.
+// It initializes the repository with a database connection that will be used
+// for all metadata queries.
+//
+// Parameters:
+//   - db: Active database connection pool
+//
+// Returns:
+//   - *DatabaseInfoRepository: Initialized repository instance
 func NewDatabaseInfoRepository(db *sql.DB) *DatabaseInfoRepository {
 	return &DatabaseInfoRepository{db: db}
 }
 
+// GetTableInfo retrieves detailed information about a specific table's structure.
+// It queries the information_schema.columns view to obtain column names, data types,
+// and nullability constraints for the specified table.
+//
+// Parameters:
+//   - ctx: Context for query cancellation and timeout control
+//   - tableName: Name of the table to retrieve information for
+//
+// Returns:
+//   - []domain.TableInfo: Slice containing column information for each column in the table
+//   - error: Any error encountered during the query execution
 func (r *DatabaseInfoRepository) GetTableInfo(
 	ctx context.Context,
 	tableName string,
@@ -54,6 +77,18 @@ func (r *DatabaseInfoRepository) GetTableInfo(
 	return tableInfo, nil
 }
 
+// ListTables retrieves a paginated list of tables from a specific database schema.
+// It queries the information_schema.tables view to obtain table metadata,
+// returning only base tables (excluding views) in descending order by table name.
+//
+// Parameters:
+//   - ctx: Context for query cancellation and timeout control
+//   - page: Page number for pagination (1-indexed), each page contains 10 tables
+//   - schema: Database schema name to list tables from (e.g., "public")
+//
+// Returns:
+//   - []domain.ListTables: Slice containing table catalog, schema, and name information
+//   - error: Any error encountered during the query execution
 func (r *DatabaseInfoRepository) ListTables(
 	ctx context.Context,
 	page int,

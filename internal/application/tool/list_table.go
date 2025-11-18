@@ -9,10 +9,19 @@ import (
 	"loadept.com/pg-mcp/internal/service"
 )
 
+// ListTables implements an MCP tool for listing database tables.
+// It provides paginated access to table metadata within a specified schema.
 type ListTables struct {
 	databaseInfoService *service.DatabaseInfoService
 }
 
+// MCPTool returns the metadata and handler for the list_tables MCP tool.
+// The tool retrieves a paginated list of tables from a database schema,
+// returning 10 tables per page.
+//
+// Returns:
+//   - *mcp.Tool: Tool metadata including name and description
+//   - mcp.ToolHandlerFor: Handler function that processes table listing requests
 func (m *ListTables) MCPTool() (
 	*mcp.Tool,
 	mcp.ToolHandlerFor[domain.ListTablesInput, domain.ListTablesOutput],

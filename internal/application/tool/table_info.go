@@ -9,10 +9,19 @@ import (
 	"loadept.com/pg-mcp/internal/service"
 )
 
+// GetTableInfo implements an MCP tool for retrieving table structure information.
+// It provides detailed metadata about table columns including names, data types,
+// and nullability constraints.
 type GetTableInfo struct {
 	databaseInfoService *service.DatabaseInfoService
 }
 
+// MCPTool returns the metadata and handler for the get_table_info MCP tool.
+// The tool retrieves structural information about a specified database table.
+//
+// Returns:
+//   - *mcp.Tool: Tool metadata including name and description
+//   - mcp.ToolHandlerFor: Handler function that processes table info requests
 func (m *GetTableInfo) MCPTool() (
 	*mcp.Tool,
 	mcp.ToolHandlerFor[domain.TableInfoInput, domain.TableInfoOutput],
