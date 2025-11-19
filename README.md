@@ -1,4 +1,5 @@
 [![Postgres MCP](https://github.com/loadept/pg-mcp/actions/workflows/pg_workflow.yml/badge.svg)](https://github.com/loadept/pg-mcp/actions/workflows/pg_workflow.yml)
+[![Postgres MCP](https://github.com/loadept/pg-mcp/actions/workflows/docker_latest_workflow.yml/badge.svg)](https://github.com/loadept/pg-mcp/actions/workflows/docker_latest_workflow.yml)
 
 # pg-mcp
 
@@ -10,13 +11,29 @@ Servidor MCP para consultas PostgreSQL de solo lectura.
 
 ## Instalación
 
-### Opción 1: Con Go
+### Última Versión (Latest - Último Commit)
+Para obtener las últimas características y mejoras (puede contener cambios no probados):
+
+#### Con Go
 ```bash
 go install loadept.com/pg-mcp/cmd/pg-mcp@latest
 ```
 
-### Opción 2: Descargando el binario
-Descarga el ejecutable precompilado desde las [releases](https://github.com/loadept/pg-mcp/releases).
+#### Con Docker
+```bash
+docker run --rm -i loadept/pg-mcp:latest -u "postgres://usuario:contraseña@host:puerto/basedatos?sslmode=disable"
+```
+
+### Versión Estable (Releases Tagueadas)
+Para versiones estables, probadas y seguras:
+
+#### Binarios Precompilados
+Descarga el ejecutable precompilado para tu sistema operativo desde las [releases](https://github.com/loadept/pg-mcp/releases).
+
+#### Con Docker
+```bash
+docker run --rm -i loadept/pg-mcp:v0.3.1 -u "postgres://usuario:contraseña@host:puerto/basedatos?sslmode=disable"
+```
 
 ## Ejecución
 ```bash
@@ -34,6 +51,12 @@ pg-mcp.exe -u "postgres://usuario:contraseña@localhost:5432/basedatos?sslmode=d
 
 -version    Muestra la versión de la aplicación
 ```
+
+## Identificación de Versiones
+Para saber qué tipo de versión tienes instalada, ejecuta `pg-mcp -version`:
+
+- **`dev`**: Última versión (latest) - Contiene el último commit, puede ser inestable
+- **`v0.3.1`** (o similar): Versión estable - Release tagueada, probada y segura
 
 ## Herramientas
 - `execute_query`: Ejecuta consultas SELECT (máx. 50 filas)

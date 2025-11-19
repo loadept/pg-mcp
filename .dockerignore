@@ -1,0 +1,9 @@
+.git*
+.editorconfig
+README.md
+LICENSE
+Dockerfile
+docker-compose.yml
+.env
+.env.local
+.env.*.local
