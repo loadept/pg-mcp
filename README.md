@@ -16,7 +16,11 @@ Para obtener las últimas características y mejoras (puede contener cambios no 
 
 #### Con Go
 ```bash
-go install loadept.com/pg-mcp/cmd/pg-mcp@latest
+# Instala el binario en $GOBIN (o $GOPATH/bin)
+go install loadept.com/pg-mcp@latest
+
+# También es posible ejecutar directamente sin instalar:
+go run loadept.com/pg-mcp@latest
 ```
 
 #### Con Docker
@@ -65,5 +69,5 @@ Para saber qué tipo de versión tienes instalada, ejecuta `pg-mcp -version`:
 
 ## Compilación desde el código fuente
 ```bash
-go build -o pg-mcp cmd/pg-mcp/main.go
+go build -o pg-mcp .
 ```
